@@ -8,7 +8,6 @@ import jakarta.servlet.*;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import shop.mtcoding.springblogriver._core.error.exception.Exception401;
 import shop.mtcoding.springblogriver.user.User;
@@ -16,8 +15,9 @@ import shop.mtcoding.springblogriver.user.User;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-@RequiredArgsConstructor
+
 public class JwtAuthorizationFilter implements Filter {
+
 
     // API 요청마다 동작
     @Override

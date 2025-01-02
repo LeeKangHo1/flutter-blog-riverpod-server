@@ -16,7 +16,7 @@ public class FilterConfig {
     public FilterRegistrationBean<CorsFilter> corsFilter() {
         log.debug("corsFilter scan");
         FilterRegistrationBean<CorsFilter> bean = new FilterRegistrationBean<>(new CorsFilter());
-        bean.addUrlPatterns("/*");
+        bean.addUrlPatterns("/**");
         bean.setOrder(0); // 낮은 번호부터 실행됨.
         return bean;
     }
@@ -30,4 +30,5 @@ public class FilterConfig {
         bean.setOrder(1);
         return bean;
     }
+
 }

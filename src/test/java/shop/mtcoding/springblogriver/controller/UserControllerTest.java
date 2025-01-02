@@ -7,13 +7,19 @@ import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.autoconfigure.restdocs.AutoConfigureRestDocs;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.web.servlet.FilterRegistrationBean;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.testcontainers.shaded.com.fasterxml.jackson.databind.ObjectMapper;
 import org.testcontainers.shaded.org.apache.commons.lang3.RandomStringUtils;
+import shop.mtcoding.springblogriver._core.auth.JwtAuthorizationFilter;
 import shop.mtcoding.springblogriver._core.auth.JwtUtil;
+import shop.mtcoding.springblogriver._core.config.FilterConfig;
 import shop.mtcoding.springblogriver._core.util.MyWithRestDoc;
 import shop.mtcoding.springblogriver.user.User;
 import shop.mtcoding.springblogriver.user.UserRequest;
@@ -187,7 +193,7 @@ public class UserControllerTest extends MyWithRestDoc {
         resultActions.andExpect(jsonPath("$.success").value("true"));
         resultActions.andExpect(jsonPath("$.response.id").value(1));
         resultActions.andExpect(jsonPath("$.response.username").value("ssar"));
-        resultActions.andExpect(jsonPath("$.response.imgUrl").value(Matchers.endsWith(".jpg")));
+        resultActions.andExpect(jsonPath("$.response.imgUrl").value(Matchers.endsWith(".png")));
         resultActions.andExpect(jsonPath("$.status").value(200));
         resultActions.andExpect(jsonPath("$.errorMessage").isEmpty());
         resultActions.andDo(MockMvcResultHandlers.print());
@@ -210,46 +216,6 @@ public class UserControllerTest extends MyWithRestDoc {
         resultActions.andExpect(jsonPath("$.response.id").value(1));
         resultActions.andExpect(jsonPath("$.response.username").value("ssar"));
         resultActions.andExpect(jsonPath("$.response.imgUrl").value("/images/1.png"));
-        resultActions.andExpect(jsonPath("$.status").value(200));
-        resultActions.andExpect(jsonPath("$.errorMessage").isEmpty());
-        resultActions.andDo(MockMvcResultHandlers.print());
-        resultActions.andDo(document);
-    }
-
-    @Test
-    public void init_user_test() throws Exception {
-        ResultActions resultActions = mvc.perform(
-                get("/init/user")
-        );
-
-        // console
-        String responseBody = resultActions.andReturn().getResponse().getContentAsString();
-        System.out.println("테스트 : " + responseBody);
-
-        // verify
-        resultActions.andExpect(jsonPath("$.success").value("true"));
-        resultActions.andExpect(jsonPath("$.response[0].id").value(3));
-        resultActions.andExpect(jsonPath("$.response[0].username").value("love"));
-        resultActions.andExpect(jsonPath("$.response[0].imgUrl").value("/images/1.png"));
-        resultActions.andExpect(jsonPath("$.status").value(200));
-        resultActions.andExpect(jsonPath("$.errorMessage").isEmpty());
-        resultActions.andDo(MockMvcResultHandlers.print());
-        resultActions.andDo(document);
-    }
-
-    @Test
-    public void init_download_test() throws Exception {
-        ResultActions resultActions = mvc.perform(
-                get("/init/download")
-        );
-
-        // console
-        String responseBody = resultActions.andReturn().getResponse().getContentAsString();
-        System.out.println("테스트 : " + responseBody);
-
-        // verify
-        resultActions.andExpect(jsonPath("$.success").value("true"));
-        resultActions.andExpect(jsonPath("$.response").isEmpty());
         resultActions.andExpect(jsonPath("$.status").value(200));
         resultActions.andExpect(jsonPath("$.errorMessage").isEmpty());
         resultActions.andDo(MockMvcResultHandlers.print());

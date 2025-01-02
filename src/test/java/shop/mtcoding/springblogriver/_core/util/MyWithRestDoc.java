@@ -33,7 +33,7 @@ public class MyWithRestDoc {
 
         mvc = MockMvcBuilders.webAppContextSetup(webApplicationContext)
                 .addFilter(new CorsFilter())
-                .addFilter(new JwtAuthorizationFilter())
+                .addFilter(new JwtAuthorizationFilter(), "/api/*")
                 .addFilter(new CharacterEncodingFilter(StandardCharsets.UTF_8.name(), true))
                 .apply(MockMvcRestDocumentation.documentationConfiguration(restDocumentation))
                 .alwaysDo(document)

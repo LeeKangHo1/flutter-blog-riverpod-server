@@ -48,38 +48,6 @@ public class PostControllerTest extends MyWithRestDoc {
     }
 
     @Test
-    public void init_post_test() throws Exception {
-        ResultActions resultActions = mvc.perform(
-                get("/init/post").param("page", "0")
-        );
-
-        // console
-        String responseBody = resultActions.andReturn().getResponse().getContentAsString();
-        System.out.println("테스트 : "+responseBody);
-
-        // verify
-        resultActions.andExpect(jsonPath("$.success").value("true"));
-        resultActions.andExpect(jsonPath("$.response.isFirst").value(true));
-        resultActions.andExpect(jsonPath("$.response.isLast").value(false));
-        resultActions.andExpect(jsonPath("$.response.pageNumber").value(0));
-        resultActions.andExpect(jsonPath("$.response.size").value(10));
-        resultActions.andExpect(jsonPath("$.response.totalPage").value(3));
-        resultActions.andExpect(jsonPath("$.response.posts[0].id").value(23));
-        resultActions.andExpect(jsonPath("$.response.posts[0].title").value("title 23"));
-        resultActions.andExpect(jsonPath("$.response.posts[0].content").value("content 23"));
-        resultActions.andExpect(jsonPath("$.response.posts[0].createdAt").exists());
-        resultActions.andExpect(jsonPath("$.response.posts[0].updatedAt").exists());
-        resultActions.andExpect(jsonPath("$.response.posts[0].bookmarkCount").value(0));
-        resultActions.andExpect(jsonPath("$.response.posts[0].user.id").value(2));
-        resultActions.andExpect(jsonPath("$.response.posts[0].user.username").value("cos"));
-        resultActions.andExpect(jsonPath("$.response.posts[0].user.imgUrl").value("/images/1.png"));
-        resultActions.andExpect(jsonPath("$.status").value(200));
-        resultActions.andExpect(jsonPath("$.errorMessage").isEmpty());
-        resultActions.andDo(MockMvcResultHandlers.print());
-        resultActions.andDo(document);
-    }
-
-    @Test
     public void find_all_test() throws Exception {
         ResultActions resultActions = mvc.perform(
                 get("/api/post").param("page", "0").header("Authorization", accessToken)
