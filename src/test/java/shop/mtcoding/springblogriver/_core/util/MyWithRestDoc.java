@@ -12,7 +12,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.filter.CharacterEncodingFilter;
-import shop.mtcoding.springblogriver._core.auth.JwtAuthorizationFilter;
+import shop.mtcoding.springblogriver._core.filter.JwtAuthorizationFilter;
 
 import java.nio.charset.StandardCharsets;
 
