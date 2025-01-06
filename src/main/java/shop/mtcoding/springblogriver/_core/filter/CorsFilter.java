@@ -14,11 +14,11 @@ public class CorsFilter implements Filter {
         HttpServletRequest request = (HttpServletRequest) req;
         HttpServletResponse response = (HttpServletResponse) res;
 
-        String origin = request.getHeader("Origin");
+        String origin = request.getHeader("Origin"); // 주소(포트)가 계속 바뀌니까 요청 때 온 주소를 헤더에서 받아옴
         System.out.println("Origin : "+origin);
 
         response.setHeader("Access-Control-Allow-Origin", origin);
-        response.setHeader("Access-Control-Expose-Headers", "Authorization");
+        response.setHeader("Access-Control-Expose-Headers", "Authorization"); // javascript에서 인증 접근 가능?
         response.setHeader("Access-Control-Allow-Methods", "POST, PUT, PATCH, GET, DELETE, OPTIONS");
         response.setHeader("Access-Control-Max-Age", "3600");
         response.setHeader("Access-Control-Allow-Headers", "Origin, X-Key, Content-Type, Accept, Authorization");
