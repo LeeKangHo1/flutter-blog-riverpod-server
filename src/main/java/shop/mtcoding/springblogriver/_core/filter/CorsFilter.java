@@ -18,7 +18,7 @@ public class CorsFilter implements Filter {
         String origin = request.getHeader("Origin"); // 주소(포트)가 계속 바뀌니까 요청 때 온 주소를 헤더에서 받아옴, 임시조치이고 나중에는 바꿔야 한다.
         System.out.println("Origin : "+origin);
 
-        response.setHeader("Access-Control-Allow-Origin", origin); // Credentials true면 *로 설정 불가
+        response.setHeader("Access-Control-Allow-Origin", origin);
         response.setHeader("Access-Control-Expose-Headers", "Authorization"); // 인증 헤더를 노출할 수 있도록 설정
         response.setHeader("Access-Control-Allow-Methods", "POST, PUT, PATCH, GET, DELETE, OPTIONS"); // OPTIONS 필수
         response.setHeader("Access-Control-Max-Age", "3600"); // 프리플라이트 요청 결과를 캐시할 시간
